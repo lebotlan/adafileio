@@ -23,10 +23,10 @@ begin
    
    while not Read.EOF loop
       declare
-         Name : String := Read.Str(' ') ;
+         Name : String := Read.XStr(' ') ;
          Data : IO.Intarray := Read.Ints ;
       begin
-         Txt.Put_Line("Read data of " & Name & "  =>  " & IO.Intarray2s(Data)) ;
+         Txt.Put_Line("Read data of '" & Name & "'  =>  " & IO.Intarray2s(Data)) ;
          
          -- Finish the current line, otherwise the next Read.str will return an empty string.
          Read.NL ;

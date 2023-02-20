@@ -52,10 +52,13 @@ package File_Io is
    -- skip_NL: if true, also skips newlines.
    procedure Skip_Spaces(Read :  T_Reader ; Skip_Nl : Boolean := false) ;
    
-   -- Read a string until the given character (excluded) is found, or end of line.
+   -- Read a string until the given character (included) is found, or end of line.
    -- May return an empty string if the current point is already at the end of line
    -- or if until_char is found at the current position.
    function Str(Read :  T_Reader ; Until_char : Character) return String ;
+   
+   -- Exactly like Str, but the Until_Char is excluded at the end.
+   function XStr(Read :  T_Reader ; Until_char : Character) return String ;
    
    LF : constant String := "" & ASCII.LF ;
    CR : constant String := "" & ASCII.CR ;

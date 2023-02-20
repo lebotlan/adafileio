@@ -5,7 +5,7 @@ with Ada.Strings.Fixed ;
 package body File_Io is
    
    package IO renames Ada.Text_IO ;
-   package S renames Ada.Strings.Fixed ;
+   package SF renames Ada.Strings.Fixed ;
    
    procedure Free is new Ada.Unchecked_Deallocation(String, String_Access) ;
    procedure LFree is new Ada.Unchecked_Deallocation(T_Lines, T_Lines_Access) ;
@@ -92,7 +92,7 @@ package body File_Io is
       function Line_Strip(Line : String) return String is
       begin
          if Strip then 
-            return S.Trim(Line,Ada.Strings.Both) ;
+            return SF.Trim(Line,Ada.Strings.Both) ;
          else
             return Line ;
          end if ;
@@ -302,6 +302,16 @@ package body File_Io is
       end if ;
       
    end Str ;
+   
+   function XStr(Read :  T_Reader ; Until_char : Character) return String is
+      S : String := Str(Read,Until_Char) ;
+   begin
+      if S'Length > 0 and then S(S'Last) = Until_Char then
+         return S(S'First..S'Last-1) ;
+      else
+         return S ;
+      end if ;
+   end XStr ;
    
    function Multiline_Str(Read :  T_Reader ; Until_char : Character ; Eol_Chars : String := LF) return String is
       F : access T_File := Read.Tfile ;      
