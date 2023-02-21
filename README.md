@@ -1,5 +1,5 @@
 # adafileio
-Ada helper library to read text files, line by line
+Ada helper library to read data from text files.
 
 ## Example
 
