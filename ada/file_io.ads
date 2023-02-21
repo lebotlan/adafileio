@@ -11,6 +11,7 @@ package File_Io is
    type T_Reader is tagged private;
    
    -- Opens a file. Returns a T_Reader ;
+   -- Use "" for stdin.
    function Fopen (File : String ;
                    
                    --

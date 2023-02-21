@@ -1,6 +1,6 @@
 .PHONY: all test clean doc build examples
 
-UNITS = read_numbers read_text ex1 ex2 ex3 ex4 ex5
+UNITS = read_numbers read_text ex1 ex1b ex2 ex3 ex4 ex5
 
 EXECS = $(UNITS:=-exe)
 

@@ -78,7 +78,9 @@ package body File_Io is
       end if ;
       
    end Update_Flags ;
-      
+   
+   Stdin_Name : String_access := new String'("STDIN") ;
+   
    -- Constructor
    function Fopen (File : String ;
                    Strip : Boolean := True ;
@@ -155,13 +157,21 @@ package body File_Io is
       
       Res : T_Reader ;
       F : access T_File := new T_File ;
-      Handler : IO.File_Type ;
    begin
-      F.Filename := new String'(File) ;
       
-      IO.Open (Handler, IO.In_File, File) ;      
-      F.Lines := Get_All_Lines(Handler) ;
-      IO.Close (Handler) ;
+      if File'Length = 0 then
+         F.Filename := Stdin_Name ;
+         F.Lines := Get_All_Lines(IO.Standard_Input) ;
+      else
+         declare
+            Handler : IO.File_Type ;
+         begin
+            F.Filename := new String'(File) ;
+            IO.Open (Handler, IO.In_File, File) ;
+            F.Lines := Get_All_Lines(Handler) ;
+            IO.Close (Handler) ;
+         end ;
+      end if ;
       
       F.Closed := False ;
       F.PL := 1 ;

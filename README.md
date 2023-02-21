@@ -5,8 +5,8 @@ Ada helper library to read text files, line by line
 
 
 ```ada
-   -- This example reads integers from a file (e.g. one integer on each line)
-   Read : IO.T_Reader := IO.Fopen("files/ex1.txt") ;
+   -- This example reads integers from standard input (""), e.g. one integer on each line.
+   Read : IO.T_Reader := IO.Fopen("") ;
    X : Integer ;
 begin   
    while not Read.EOF loop
